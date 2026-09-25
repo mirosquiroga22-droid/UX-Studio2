@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Should I Cook?</title>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --ink:#17211c;
+      --green:#26372e;
+      --muted:#667068;
+      --cream:#f7f5ef;
+      --soft:#eef0e9;
+      --gold:#b67b43;
+      --white:#fff;
+      --border:#e4e5df;
+      --shadow:0 8px 22px rgba(28,35,30,.08);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:#fff;
+      font-family:"DM Sans",Arial,sans-serif;
+    }
+    img{display:block;width:100%;object-fit:cover}
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+    .container{width:min(1180px,90%);margin:auto}
+
+    /* NAV */
+    header{
+      height:86px;
+      display:flex;
+      align-items:center;
+      background:rgba(255,255,255,.96);
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+    nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;font-family:"Playfair Display",serif;font-weight:600;font-size:20px;line-height:1}
+    .brand i{font-size:32px;color:var(--gold)}
+    .nav-right{display:flex;align-items:center;gap:45px;font-size:14px}
+    .nav-right a:hover{opacity:.65}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      border:0;
+      border-radius:13px;
+      padding:14px 28px;
+      color:#fff;
+      background:var(--green);
+      cursor:pointer;
+      transition:.2s;
+    }
+    .btn:hover{transform:translateY(-2px)}
+
+    /* HERO */
+    .hero{
+      min-height:565px;
+      background:
+        linear-gradient(90deg,rgba(248,247,243,.98) 0%,rgba(248,247,243,.93) 43%,rgba(248,247,243,.05) 66%),
+        url("https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1600") center/cover;
+      display:flex;
+      align-items:center;
+    }
+    .hero-content{width:53%;padding:60px 0}
+    h1,h2,h3{font-family:"Playfair Display",Georgia,serif}
+    h1{font-size:64px;line-height:1.06;margin:0 0 18px;max-width:610px;font-weight:500}
+    .hero p{font-size:19px;margin:0 0 24px;color:#364039}
+    .search{
+      max-width:600px;
+      height:58px;
+      display:flex;
+      align-items:center;
+      padding:7px 8px 7px 20px;
+      background:#fff;
+      border:1px solid #d9ddd8;
+      border-radius:13px;
+      box-shadow:0 4px 10px rgba(0,0,0,.04);
+    }
+    .search i{color:#68716c}
+    .search input{border:0;outline:0;flex:1;padding:0 14px;background:transparent;font-size:14px}
+    .search button{width:54px;height:44px;border:0;border-radius:11px;background:var(--green);color:#fff;cursor:pointer}
+    .scribble{
+      font-family:"Caveat",cursive;
+      font-size:20px;
+      color:#77743d;
+      margin:13px 0 0 200px;
+      transform:rotate(-4deg);
+    }
+
+    /* BENEFITS */
+    .benefits{padding:40px 0 52px}
+    .benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center}
+    .icon-circle{
+      width:78px;height:78px;border-radius:50%;background:#f0f1ed;margin:0 auto 18px;
+      display:grid;place-items:center;font-size:34px;font-weight:300;
+    }
+    .benefit h3{font-size:20px;margin:0 0 6px}
+    .benefit p{font-size:14px;color:#59615c;margin:0}
+
+    /* POPULAR */
+    .popular{padding:10px 0 65px}
+    .section-title{text-align:center;font-size:38px;font-weight:500;margin:0 0 30px}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+    .card{border:1px solid var(--border);border-radius:13px;overflow:hidden;background:#fff;box-shadow:var(--shadow);transition:.2s}
+    .card:hover{transform:translateY(-4px)}
+    .card img{height:178px}
+    .card-bottom{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-weight:600;font-size:14px}
+
+    /* BANNER */
+    .banner{
+      margin-bottom:70px;
+      min-height:320px;
+      padding:50px 64px;
+      border-radius:17px;
+      background:linear-gradient(110deg,#eef0e9,#e7e9e1);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      overflow:hidden;
+    }
+    .banner-copy{max-width:520px}
+    .eyebrow{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#667068;margin-bottom:16px}
+    .banner h2{font-size:43px;line-height:1.05;margin:0 0 14px;font-weight:500}
+    .banner p{font-size:17px;line-height:1.6;margin:0 0 24px;color:#424b45}
+    .banner-art{font-size:115px;color:#526052;opacity:.9;padding:20px 55px}
+    .banner-art .note{font-family:"Caveat",cursive;font-size:22px;transform:rotate(-8deg);margin-left:100px;margin-bottom:-5px}
+
+    /* FOOTER */
+    footer{border-top:1px solid #ecece8;padding:32px 0}
+    .footer-row{display:flex;align-items:center;justify-content:space-between;font-size:12px}
+    .footer-brand{font-weight:700}
+    .footer-links{display:flex;align-items:center;gap:25px}
+    .social{display:flex;gap:18px;font-size:16px}
+
+    @media(max-width:900px){
+      .nav-right a:not(.btn){display:none}
+      .hero{
+        background:
+          linear-gradient(rgba(248,247,243,.86),rgba(248,247,243,.86)),
+          url("https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=1200") center/cover;
+      }
+      .hero-content{width:100%}
+      h1{font-size:50px}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .banner-art{display:none}
+    }
+    @media(max-width:600px){
+      header{height:72px}
+      .brand{font-size:16px}.brand i{font-size:26px}
+      .nav-right{gap:10px}.nav-right .btn{padding:11px 16px}
+      .hero{min-height:520px}
+      h1{font-size:42px}
+      .hero p{font-size:16px}
+      .scribble{margin-left:80px}
+      .benefit-grid{grid-template-columns:1fr;gap:35px}
+      .cards{grid-template-columns:1fr}
+      .card img{height:230px}
+      .banner{padding:40px 30px}
+      .banner h2{font-size:36px}
+      .footer-row{flex-direction:column;gap:22px}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav class="container">
+    <a class="brand" href="#">
+      <i class="fa-solid fa-kitchen-set"></i>
+      <span>What<br>Should I Cook?</span>
+    </a>
+
+    <div class="nav-right">
+      <a href="#home">Home</a>
+      <a href="#recipes">Recipes</a>
+      <a href="#about">About</a>
+      <a class="btn" href="#recipes">Get Started</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Good food<br>starts with<br>what you have.</h1>
+        <p>Turn your ingredients into something delicious.</p>
+
+        <form class="search" onsubmit="findRecipe(event)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="ingredients" type="text" placeholder="Enter ingredients (e.g. chicken, rice, tomato...)" aria-label="Enter ingredients">
+          <button type="submit" aria-label="Search"><i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+        <div class="scribble">↖ Try it!<br>Start with what's in your kitchen.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits" id="about">
+    <div class="container benefit-grid">
+      <article class="benefit">
+        <div class="icon-circle"><i class="fa-regular fa-lemon"></i></div>
+        <h3>Use what you have</h3>
+        <p>Reduce food waste</p>
+      </article>
+
+      <article class="benefit">
+        <div class="icon-circle"><i class="fa-regular fa-clock"></i></div>
+        <h3>Save time</h3>
+        <p>Quick &amp; easy recipes</p>
+      </article>
+
+      <article class="benefit">
+        <div class="icon-circle"><i class="fa-regular fa-heart"></i></div>
+        <h3>Discover new favorites</h3>
+        <p>Delicious and simple</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="popular" id="recipes">
+    <div class="container">
+      <h2 class="section-title">Popular right now</h2>
+
+      <div class="cards">
+        <a class="card" href="#">
+          <img src="https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Pasta with tomatoes">
+          <div class="card-bottom"><span>Pasta</span><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <a class="card" href="#">
+          <img src="https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Chicken dish">
+          <div class="card-bottom"><span>Chicken</span><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <a class="card" href="#">
+          <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Vegetarian bowl">
+          <div class="card-bottom"><span>Vegetarian</span><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <a class="card" href="#">
+          <img src="https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Quick healthy meal">
+          <div class="card-bottom"><span>Quick &amp; Easy</span><i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container banner">
+    <div class="banner-copy">
+      <div class="eyebrow">Good food, less waste</div>
+      <h2>Make the most<br>of your ingredients.</h2>
+      <p>Find simple, delicious recipes and turn everyday ingredients into something special.</p>
+      <a class="btn" href="#recipes">Explore recipes <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div class="banner-art" aria-hidden="true">
+      <div class="note">Same ingredients.<br>New ideas. ♡</div>
+      <i class="fa-solid fa-seedling"></i>
+      <i class="fa-solid fa-carrot"></i>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div class="footer-brand">What Should I Cook?</div>
+
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#recipes">Recipes</a>
+      <a href="#about">About</a>
+    </div>
+
+    <div class="social">
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function findRecipe(event){
+    event.preventDefault();
+    const value = document.getElementById("ingredients").value.trim();
+    if(value){
+      alert("Searching recipes with: " + value);
+    }else{
+      alert("Add at least one ingredient first.");
+    }
+  }
+</script>
+
+</body>
+</html>
